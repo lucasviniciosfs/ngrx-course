@@ -29,9 +29,6 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
-@include mat.elevation-classes();
-@include mat.app-background();
-
 $dark-primary-text: rgba(black, 0.87);
 
 $light-primary-text: white;
