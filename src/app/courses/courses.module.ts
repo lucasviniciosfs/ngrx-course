@@ -25,17 +25,19 @@ import { EntityDataService, EntityDefinitionService, EntityMetadataMap} from '@n
 import {compareCourses, Course} from './model/course';
 
 import {compareLessons, Lesson} from './model/lesson';
+import { AuthGuard } from '../auth/auth.guard';
 
 
 export const coursesRoutes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [ AuthGuard]
 
   },
   {
     path: ':courseUrl',
-    component: CourseComponent
+    component: CourseComponent,
   }
 ];
 
@@ -73,7 +75,8 @@ export const coursesRoutes: Routes = [
     CourseComponent
   ],
   providers: [
-    CoursesHttpService
+    CoursesHttpService,
+    AuthGuard
   ]
 })
 export class CoursesModule {
