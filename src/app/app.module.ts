@@ -40,7 +40,8 @@ const routes: Routes = [
 @NgModule({ declarations: [
         AppComponent
     ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
+    bootstrap: [AppComponent], imports: [
+      BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(routes),
         MatMenuModule,
@@ -52,6 +53,8 @@ const routes: Routes = [
         AuthModule.forRoot(),
         StoreModule.forRoot({}, {}),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-        StoreModule.forFeature(fromAppState.appStateFeatureKey, fromAppState.reducers, { metaReducers: fromAppState.metaReducers })], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        StoreModule.forFeature(fromAppState.appStateFeatureKey, fromAppState.reducers, { metaReducers: fromAppState.metaReducers }),
+        EffectsModule.forRoot([])
+      ], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {
 }
