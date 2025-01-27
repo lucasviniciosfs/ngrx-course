@@ -51,10 +51,22 @@ const routes: Routes = [
         MatListModule,
         MatToolbarModule,
         AuthModule.forRoot(),
-        StoreModule.forRoot({}, {}),
+        StoreModule.forRoot(fromAppState.reducers, {
+          metaReducers: fromAppState.metaReducers,
+          runtimeChecks: {
+            strictStateImmutability: true,
+            strictActionImmutability: true,
+            strictActionSerializability: true,
+            strictStateSerializability: true
+          }
+        }),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
         StoreModule.forFeature(fromAppState.appStateFeatureKey, fromAppState.reducers, { metaReducers: fromAppState.metaReducers }),
-        EffectsModule.forRoot([])
+        EffectsModule.forRoot([]),
+        StoreRouterConnectingModule.forRoot({
+          stateKey: 'router',
+          routerState: RouterState.Minimal
+        })
       ], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {
 }
